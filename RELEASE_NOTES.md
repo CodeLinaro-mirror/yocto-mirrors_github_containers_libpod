@@ -3,7 +3,7 @@
 ## 6.0.0
 ### Breaking Changes
 - Due to breaking changes in this release, Podman v6.0.0 must be used with Buildah v1.44.0, Skopeo v1.23, Netavark and Aardvark v2.0.0, and configuration files from the container-libs repository's common/v0.68.0 release.
-- Support for BoltDB databases has been dropped. Starting Podman 6 when the BoltDB database is in use will have Podman attempt an automatic migration from SQLite to BoltDB.
+- Support for BoltDB databases has been dropped. Starting Podman 6 when the BoltDB database is in use will have Podman attempt an automatic migration from BoltDB to SQLite.
 - Support for running on Intel Macs has been removed.
 - Support for running on Windows 10 has been removed.
 - Support for running on cgroups v1 systems has been removed. Please update your system to use cgroups v2.
