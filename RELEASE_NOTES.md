@@ -1,6 +1,9 @@
 # Release Notes
 
 ## 6.0.0
+### Security
+- This release addresses CVE-2026-57231, where a malicious image using malformed `Env` entries could cause host environment variables to leak into containers run based on the image, including the ability to use the `*` glob operator to leak large numbers of environment variables without knowing their exact names ([GHSA-4hq8-gpf5-8p68](https://github.com/podman-container-tools/podman/security/advisories/GHSA-4hq8-gpf5-8p68)).
+
 ### Breaking Changes
 - Due to breaking changes in this release, Podman v6.0.0 must be used with Buildah v1.44.0, Skopeo v1.23, Netavark and Aardvark v2.0.0, and configuration files from the container-libs repository's common/v0.68.0 release.
 - Support for BoltDB databases has been dropped. Starting Podman 6 when the BoltDB database is in use will have Podman attempt an automatic migration from BoltDB to SQLite.
@@ -101,8 +104,9 @@
 - Fixed a bug where Quadlet `.container` files using the `http_proxy=true` setting did not properly escape special characters in the environment variables added to the container when creating the systemd unit file ([#28698](https://github.com/podman-container-tools/podman/issues/28698)).
 - Fixed a bug where containers created using the remote Podman client ignored the `log_path` setting in `containers.conf` ([#28792](https://github.com/podman-container-tools/podman/issues/28792)).
 - Fixed a bug where the remote Podman client's `podman save` command would fail on Linux when using the `-f oci-dir` or `-f docker-dir` arguments.
-
-Fixed an issue that made podman-remote save -f oci-dir/docker-dir fail on linux.
+- Fixed a bug where `podman machine` VMs on Linux would fail to mount the directories under a symlinked path into the VM ([#28911](https://github.com/podman-container-tools/podman/issues/28911)).
+- Fixed a bug where the `podman container checkpoint --leave-running` command could produce inconsistent checkpoints because the rootfs and named volume diffs were performed after the processes were allowed to run for a time; the container is now paused until the checkpoint is fully complete.
+- Fixed a bug where the `podman kube play` command would incorrectly set memory limits if the user specified the limit as a fractical BinarySI quantity (e.g. `1.5Gi`) ([#28789](https://github.com/podman-container-tools/podman/issues/28789)).
 
 ### API
 - An improvement pass has been made over API documentation to document fields which were missing documentation. Look forward to more API documentation improvements in future releases!
