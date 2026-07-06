@@ -12,7 +12,7 @@ require (
 	github.com/checkpoint-restore/go-criu/v8 v8.3.0
 	github.com/containers/gvisor-tap-vsock v0.8.9
 	github.com/containers/libhvee v0.11.0
-	github.com/containers/ocicrypt v1.3.1-0.20260527145308-c03ceaa8ff0d
+	github.com/containers/ocicrypt v1.3.1-0.20260705162120-b646aa4c2080
 	github.com/containers/psgo v1.10.0
 	github.com/containers/winquit v1.1.0
 	github.com/coreos/go-systemd/v22 v22.7.0
