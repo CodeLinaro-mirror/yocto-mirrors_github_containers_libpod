@@ -335,13 +335,13 @@ func (ic *ContainerEngine) installQuadlet(_ context.Context, path, destName, ins
 		return "", fmt.Errorf("%q is not a supported Quadlet file type", filepath.Ext(finalPath))
 	}
 
-	var osFlags = os.O_CREATE | os.O_WRONLY
+	osFlags := os.O_CREATE | os.O_WRONLY
 
 	if !replace {
 		osFlags |= os.O_EXCL
 	}
 
-	file, err := os.OpenFile(finalPath, osFlags, 0644)
+	file, err := os.OpenFile(finalPath, osFlags, 0o644)
 	if err != nil {
 		if errors.Is(err, fs.ErrExist) && !replace {
 			return "", fmt.Errorf("a Quadlet with name %s already exists, refusing to overwrite", filepath.Base(finalPath))
