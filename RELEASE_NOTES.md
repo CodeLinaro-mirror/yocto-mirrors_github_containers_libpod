@@ -8,6 +8,7 @@
 - The `podman manifest push` command now includes two new options, `--retry` and `--retry-delay`, which allow pushes to be automatically retried on failure ([#28590](https://github.com/podman-container-tools/podman/issues/28590)).
 - Quadlet `.container` units now support a new key, `ImageVolume=`, to configure how volumes from images are handled ([#28875](https://github.com/podman-container-tools/podman/issues/28875)).
 - The `podman generate kube` command now includes support for generating container healthchecks as a `livenessProbe` ([#22095](https://github.com/podman-container-tools/podman/issues/22095)).
+- A new option, `force_port_listen`, has been added to `containers.conf`. This is required to be set when running Podman on WSL to support port forwarding from the Windows host. It is automatically set on newly-created `podman machine` VMs on Windows using the WSL provider.
 
 ### Changes
 - The `podman info` command now includes free memory available on the host (in addition to used memory and total memory) ([#29116](https://github.com/podman-container-tools/podman/issues/29116)).
@@ -40,9 +41,9 @@
 
 ### Misc
 - Updated Buildah to v1.45.0
-- Updated the image library to v5.41.0
+- Updated the image library to v5.41.1
 - Updated the storage library to v1.64.0
-- Updated the common library to v0.69.0
+- Updated the common library to v0.69.1
 
 ## 6.0.2
 ### Bugfixes
