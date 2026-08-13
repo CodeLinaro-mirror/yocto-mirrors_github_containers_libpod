@@ -1,5 +1,9 @@
 # Release Notes
 
+## 5.8.6
+### Security
+- This release addressed [CVE-2026-19730](https://github.com/podman-container-tools/podman/security/advisories/GHSA-fx76-2j3w-2mx6) where the `podman quadlet install --replace` command did not truncate the file being replaced, meaning replacing a longer file with a shorter one would result in content from the original file incorrectly being retained.
+
 ## 5.8.5
 ### Bugfixes
 - Fixed a bug where Podman Machine VMs on Mac using the libkrun provider could be regularly turned off by a port-scanning process on the host unintentionally commanding the VM to shut down.
