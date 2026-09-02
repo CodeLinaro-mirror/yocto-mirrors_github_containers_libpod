@@ -1,5 +1,12 @@
 # Release Notes
 
+## 6.1.1
+### Security
+- This release addresses CVE-2026-17106, where a crafted tar archive could write outside the extraction directory through the use of malicious links ([GHSA-hfg8-hc9c-6c3h](https://github.com/moby/go-archive/security/advisories/GHSA-hfg8-hc9c-6c3h)).
+
+### Bugfixes
+- Fixed broken rootlessport bind behavior with `-p 0.0.0.0:... -p [::]:...` which failed instead of binding both v4 and v6 separately. Podman Machine on WSL should now correctly forward ports again by binding separate IPv4 and IPv6 sockets to make the WSL forwarder logic work again ([#29377](https://github.com/podman-container-tools/podman/issues/29377)).
+
 ## 6.1.0
 ### Features
 - A new command has been added, `podman volume rename`, to allow renaming volumes. Volumes created using volume drivers and volumes that are currently used by a container cannot be renamed ([#28189](https://github.com/podman-container-tools/podman/issues/28189)).
