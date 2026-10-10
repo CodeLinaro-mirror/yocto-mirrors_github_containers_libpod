@@ -74,9 +74,15 @@ fi
 sudo tee $conf <<EOF
 [storage]
 driver = "$STORAGE_FS"
+EOF
+
+# graphroot/runroot were required on older versions so we need it for the old upgrade base version
+if [[ "$TEST" == "upgrade" ]]; then
+    sudo tee --append $conf <<EOF
 graphroot = "/var/lib/containers/storage"
 runroot = "/run/containers/storage"
 EOF
+fi
 
 if [[ -n "$CI_DESIRED_COMPOSEFS" && "$PRIV" == "root" ]]; then
     # Append composefs options
@@ -127,15 +133,6 @@ if [[ "$TEST" != build && "$TEST" != unit ]]; then
     remove_packaged_podman_files
     make docs binaries EXTRA_BUILDTAGS="$TEST_BUILD_TAGS"
     sudo make install PREFIX=/usr ETCDIR=/etc
-
-    # Hack, new VM images removed slirp4netns but 5.8 still needs it.
-    # Add it back to the image but for now we install it here.
-    if [[ "$OS_RELEASE_ID" =~ "fedora" ]]; then
-        sudo dnf install -y slirp4netns
-    else
-        sudo apt-get update
-        sudo apt-get -q -y install slirp4netns
-    fi
 fi
 
 # Delete netavark v2, we build a custom version into the images but podman 5.8
